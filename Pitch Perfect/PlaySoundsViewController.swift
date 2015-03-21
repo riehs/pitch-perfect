@@ -25,6 +25,16 @@ class PlaySoundsViewController: UIViewController {
         
         audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
         audioPlayer.enableRate = true
+        
+        //This piece of code sets the sound to always play on the Speakers
+        let session = AVAudioSession.sharedInstance()
+        var error: NSError?
+        session.setCategory(AVAudioSessionCategoryPlayback, error: &error)
+        session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, error: &error)
+        session.setActive(true, error: &error)
+        
+     /*   More information about how this all works can be found at this link: https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVAudioSession_ClassReference/index.html#//apple_ref/occ/cl/AVAudioSession1
+        */
     }
 
 
