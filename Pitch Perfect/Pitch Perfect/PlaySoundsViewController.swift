@@ -81,9 +81,6 @@ class PlaySoundsViewController: UIViewController {
     func playAudioWithVariablePitch(pitch: Float){
         audioPlayer.stop()
         
-        // This statement ensures that the audio file restarts when a new sound effect is pressed.
-        audioPlayer.currentTime = 0.0
-        
         audioEngine.stop()
         audioEngine.reset()
         
