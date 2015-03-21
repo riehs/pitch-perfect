@@ -1,128 +1,107 @@
 //
-//  RecordSoundsViewController.swift
+//  PlaySoundsViewController.swift
 //  Pitch Perfect
 //
-//  Created by Daniel Riehs on 3/4/15.
+//  Created by Daniel Riehs on 3/5/15.
 //  Copyright (c) 2015 Daniel Riehs. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
+class PlaySoundsViewController: UIViewController {
 
-    @IBOutlet weak var recordingInProgress: UILabel!
-    @IBOutlet weak var stopButton: UIButton!
-    @IBOutlet weak var recordButton: UIButton!
-    @IBOutlet weak var pauseButton: UIButton!
-    @IBOutlet weak var resumeButton: UIButton!
-  
-    var audioRecorder:AVAudioRecorder!
-    var recordedAudio:RecordedAudio!
- 
+    var audioPlayer:AVAudioPlayer!
+    var receivedAudio:RecordedAudio!
+    
+    var audioEngine:AVAudioEngine!
+    var audioFile:AVAudioFile!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        audioEngine = AVAudioEngine()
+        audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+        
+        audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
+        audioPlayer.enableRate = true
+        
+        //This piece of code sets the sound to always play on the Speakers
+        let session = AVAudioSession.sharedInstance()
+        var error: NSError?
+        session.setCategory(AVAudioSessionCategoryPlayback, error: &error)
+        session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, error: &error)
+        session.setActive(true, error: &error)
+        
+     /*   More information about how this all works can be found at this link: https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVAudioSession_ClassReference/index.html#//apple_ref/occ/cl/AVAudioSession1
+        */
     }
-    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        recordButton.enabled = true
-        stopButton.hidden = true
-        pauseButton.hidden = true
-        resumeButton.hidden = true
-    }
-    
+ 
 
-    @IBAction func recordAudio(sender: UIButton) {
-        stopButton.hidden = false
-        recordButton.enabled = false
-        recordingInProgress.hidden = false
-        pauseButton.hidden = false
+    @IBAction func playSlowAudio(sender: UIButton) {
+        audioPlayer.stop()
+        audioPlayer.rate = 0.5
         
-        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        // This statement ensures that the audio file restarts when a new sound effect is pressed.
+        audioPlayer.currentTime = 0.0
         
-        let currentDateTime = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let recordingName = formatter.stringFromDate(currentDateTime)+".wav"
-        let pathArray = [dirPath, recordingName]
-        let filePath = NSURL.fileURLWithPathComponents(pathArray)
-        println(filePath)
-        
-        var session = AVAudioSession.sharedInstance()
-        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
-        
-        audioRecorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
-        audioRecorder.delegate = self
-        audioRecorder.meteringEnabled = true
-        audioRecorder.prepareToRecord()
-        audioRecorder.record()
-    }
-    
-
-    @IBAction func pauseRecording(sender: UIButton) {
-        
-        //The pause and resume buttons never display at the same time.
-        pauseButton.hidden = true
-        resumeButton.hidden = false
-        
-        recordingInProgress.enabled = false
-        audioRecorder.pause()
-    }
-
-    
-    @IBAction func resumeRecording(sender: UIButton) {
-        
-        //The pause and resume buttons never display at the same time.
-        pauseButton.hidden = false
-        resumeButton.hidden = true
-        
-        recordingInProgress.enabled = true
-        audioRecorder.record()
+        audioPlayer.play()
     }
     
     
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {
-        if (flag){
-        recordedAudio = RecordedAudio()
-        recordedAudio.filePathUrl = recorder.url
-        recordedAudio.title = recorder.url.lastPathComponent
-        self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
-        }else{
-            println("Recording was not successful")
-            recordButton.enabled = true
-            stopButton.hidden = true
-            resumeButton.hidden = true
-            pauseButton.hidden = true
-        }
-    }
-
-    
-    //The location of the recorded audio file is stored in a RecordedAudio object.
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "stopRecording"){
-            let playSoundsVC:PlaySoundsViewController = segue.destinationViewController as PlaySoundsViewController
-            let data = sender as RecordedAudio
-            playSoundsVC.receivedAudio = data
-        }
+    @IBAction func playFastAudio(sender: UIButton) {
+        audioPlayer.stop()
+        audioPlayer.rate = 1.5
+        
+        // This statement ensures that the audio file restarts when a new sound effect is pressed.
+        audioPlayer.currentTime = 0.0
+        
+        audioPlayer.play()
     }
     
     
-    @IBAction func stopRecording(sender: UIButton) {
-        recordingInProgress.hidden = true
-        resumeButton.hidden = true
-        pauseButton.hidden = true
-        audioRecorder.stop()
-        var audioSession = AVAudioSession.sharedInstance()
-        audioSession.setActive(false, error: nil)
+    @IBAction func playChipmunkAudio(sender: UIButton) {
+        playAudioWithVariablePitch(1000)
     }
-
+    
+    
+    @IBAction func playDarthvaderAudio(sender: UIButton) {
+        playAudioWithVariablePitch(-1000)
+    }
+    
+    
+    //This function is only used for sound effects that require pitch changes.
+    
+    func playAudioWithVariablePitch(pitch: Float){
+        audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
+        
+        var audioPlayerNode = AVAudioPlayerNode()
+        audioEngine.attachNode(audioPlayerNode)
+        
+        var changePitchEffect = AVAudioUnitTimePitch()
+        changePitchEffect.pitch = pitch
+        audioEngine.attachNode(changePitchEffect)
+        
+        audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
+        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
+        
+        audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+        audioEngine.startAndReturnError(nil)
+        
+        audioPlayerNode.play()
+    }
+    
+    
+    @IBAction func stopAudio(sender: UIButton) {
+        audioPlayer.stop()
+    }
+    
 }
-
