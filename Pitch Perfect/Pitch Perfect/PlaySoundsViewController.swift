@@ -16,7 +16,7 @@ class PlaySoundsViewController: UIViewController {
     
     var audioEngine:AVAudioEngine!
     var audioFile:AVAudioFile!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,24 +45,12 @@ class PlaySoundsViewController: UIViewController {
  
 
     @IBAction func playSlowAudio(sender: UIButton) {
-        audioPlayer.stop()
-        audioPlayer.rate = 0.5
-        
-        // This statement ensures that the audio file restarts when a new sound effect is pressed.
-        audioPlayer.currentTime = 0.0
-        
-        audioPlayer.play()
+        playAudioWithVariableSpeed(0.5)
     }
     
     
     @IBAction func playFastAudio(sender: UIButton) {
-        audioPlayer.stop()
-        audioPlayer.rate = 1.5
-        
-        // This statement ensures that the audio file restarts when a new sound effect is pressed.
-        audioPlayer.currentTime = 0.0
-        
-        audioPlayer.play()
+        playAudioWithVariableSpeed(1.5)
     }
     
     
@@ -76,13 +64,31 @@ class PlaySoundsViewController: UIViewController {
     }
     
     
-    //This function is only used for sound effects that require pitch changes.
+    @IBAction func stopAudioButton(sender: AnyObject) {
+        stopAudio()
+    }
     
-    func playAudioWithVariablePitch(pitch: Float){
-        audioPlayer.stop()
+
+    //For audio for the fast or slow buttons.
+    func playAudioWithVariableSpeed(audioRate: Float!) {
+
+        //First, stops audio that is currently playing.
+        stopAudio()
         
-        audioEngine.stop()
-        audioEngine.reset()
+        audioPlayer.rate = audioRate
+        
+        // This statement ensures that the audio file restarts when a new sound effect is pressed.
+        audioPlayer.currentTime = 0.0
+        
+        audioPlayer.play()
+    }
+    
+    
+    //Plays audio for the variable pitch buttons.
+    func playAudioWithVariablePitch(pitch: Float){
+        
+        //First, stops audio that is currently playing.
+        stopAudio()
         
         var audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
@@ -99,9 +105,17 @@ class PlaySoundsViewController: UIViewController {
         
         audioPlayerNode.play()
     }
+
     
-    
-    @IBAction func stopAudio(sender: UIButton) {
+    func stopAudio() {
+        
+        //Stops the fast and slow playback.
         audioPlayer.stop()
+        
+        //Stops the variable pitch playback.
+        audioEngine.stop()
+        audioEngine.reset()
     }
+    
+
 }
