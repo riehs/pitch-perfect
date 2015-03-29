@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A26B5E091AC8443A00F8655A /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = A26B5E081AC8443A00F8655A /* README.md */; };
-		A26B5E0B1AC844B700F8655A /* LICENSE.md in Sources */ = {isa = PBXBuildFile; fileRef = A26B5E0A1AC844B700F8655A /* LICENSE.md */; };
 		A2C0660B1AA91C170047FB10 /* PlaySoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C0660A1AA91C170047FB10 /* PlaySoundsViewController.swift */; };
 		A2C0660F1AA9DC980047FB10 /* RecordedAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C0660E1AA9DC980047FB10 /* RecordedAudio.swift */; };
 		A2FB03581AA7CBDA0066A757 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FB03571AA7CBDA0066A757 /* AppDelegate.swift */; };
@@ -30,8 +28,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A26B5E081AC8443A00F8655A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		A26B5E0A1AC844B700F8655A /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = LICENSE.md; path = ../LICENSE.md; sourceTree = "<group>"; };
 		A2C0660A1AA91C170047FB10 /* PlaySoundsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySoundsViewController.swift; sourceTree = "<group>"; };
 		A2C0660E1AA9DC980047FB10 /* RecordedAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordedAudio.swift; sourceTree = "<group>"; };
 		A2FB03521AA7CBDA0066A757 /* Pitch Perfect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pitch Perfect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,8 +63,6 @@
 		A2FB03491AA7CBDA0066A757 = {
 			isa = PBXGroup;
 			children = (
-				A26B5E081AC8443A00F8655A /* README.md */,
-				A26B5E0A1AC844B700F8655A /* LICENSE.md */,
 				A2FB03541AA7CBDA0066A757 /* Pitch Perfect */,
 				A2FB036A1AA7CBDA0066A757 /* Pitch PerfectTests */,
 				A2FB03531AA7CBDA0066A757 /* Products */,
@@ -228,9 +222,7 @@
 			files = (
 				A2C0660F1AA9DC980047FB10 /* RecordedAudio.swift in Sources */,
 				A2FB035A1AA7CBDA0066A757 /* RecordSoundsViewController.swift in Sources */,
-				A26B5E091AC8443A00F8655A /* README.md in Sources */,
 				A2C0660B1AA91C170047FB10 /* PlaySoundsViewController.swift in Sources */,
-				A26B5E0B1AC844B700F8655A /* LICENSE.md in Sources */,
 				A2FB03581AA7CBDA0066A757 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
