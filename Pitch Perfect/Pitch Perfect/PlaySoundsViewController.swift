@@ -90,10 +90,10 @@ class PlaySoundsViewController: UIViewController {
         //First, stops audio that is currently playing.
         stopAudio()
         
-        var audioPlayerNode = AVAudioPlayerNode()
+        let audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
         
-        var changePitchEffect = AVAudioUnitTimePitch()
+        let changePitchEffect = AVAudioUnitTimePitch()
         changePitchEffect.pitch = pitch
         audioEngine.attachNode(changePitchEffect)
         
