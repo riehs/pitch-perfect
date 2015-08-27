@@ -68,6 +68,7 @@
 				A2FB03531AA7CBDA0066A757 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		A2FB03531AA7CBDA0066A757 /* Products */ = {
 			isa = PBXGroup;
