@@ -21,17 +21,29 @@ class PlaySoundsViewController: UIViewController {
 		super.viewDidLoad()
 
 		audioEngine = AVAudioEngine()
-		audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl, error: nil)
+		audioFile = try? AVAudioFile(forReading: receivedAudio.filePathUrl)
 
-		audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl, error: nil)
+		audioPlayer = try? AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
 		audioPlayer.enableRate = true
 
 		//This piece of code sets the sound to always play on the Speakers
 		let session = AVAudioSession.sharedInstance()
 		var error: NSError?
-		session.setCategory(AVAudioSessionCategoryPlayback, error: &error)
-		session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, error: &error)
-		session.setActive(true, error: &error)
+		do {
+			try session.setCategory(AVAudioSessionCategoryPlayback)
+		} catch let error1 as NSError {
+			error = error1
+		}
+		do {
+			try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+		} catch let error1 as NSError {
+			error = error1
+		}
+		do {
+			try session.setActive(true)
+		} catch let error1 as NSError {
+			error = error1
+		}
 
 	 /*   More information about how this all works can be found at this link: https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVAudioSession_ClassReference/index.html#//apple_ref/occ/cl/AVAudioSession1
 		*/
@@ -101,7 +113,10 @@ class PlaySoundsViewController: UIViewController {
 		audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
 
 		audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
-		audioEngine.startAndReturnError(nil)
+		do {
+			try audioEngine.start()
+		} catch _ {
+		}
 
 		audioPlayerNode.play()
 	}
