@@ -28,21 +28,20 @@ class PlaySoundsViewController: UIViewController {
 
 		//This piece of code sets the sound to always play on the Speakers
 		let session = AVAudioSession.sharedInstance()
-		var error: NSError?
 		do {
 			try session.setCategory(AVAudioSessionCategoryPlayback)
-		} catch let error1 as NSError {
-			error = error1
+		} catch let error as NSError {
+			print(error)
 		}
 		do {
 			try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
-		} catch let error1 as NSError {
-			error = error1
+		} catch let error as NSError {
+			print(error)
 		}
 		do {
 			try session.setActive(true)
-		} catch let error1 as NSError {
-			error = error1
+		} catch let error as NSError {
+			print(error)
 		}
 
 	 /*   More information about how this all works can be found at this link: https://developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVAudioSession_ClassReference/index.html#//apple_ref/occ/cl/AVAudioSession1
