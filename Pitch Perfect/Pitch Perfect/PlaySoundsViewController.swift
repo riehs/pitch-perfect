@@ -21,9 +21,9 @@ class PlaySoundsViewController: UIViewController {
 		super.viewDidLoad()
 
 		audioEngine = AVAudioEngine()
-		audioFile = try? AVAudioFile(forReading: receivedAudio.filePathUrl)
+		audioFile = try? AVAudioFile(forReading: receivedAudio.filePathUrl as URL)
 
-		audioPlayer = try? AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
+		audioPlayer = try? AVAudioPlayer(contentsOf: receivedAudio.filePathUrl as URL)
 		audioPlayer.enableRate = true
 
 		//This piece of code sets the sound to always play on the Speakers
@@ -34,7 +34,7 @@ class PlaySoundsViewController: UIViewController {
 			print(error)
 		}
 		do {
-			try session.overrideOutputAudioPort(AVAudioSessionPortOverride.Speaker)
+			try session.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
 		} catch let error as NSError {
 			print(error)
 		}
@@ -55,33 +55,33 @@ class PlaySoundsViewController: UIViewController {
 	}
 
 
-	@IBAction func playSlowAudio(sender: UIButton) {
+	@IBAction func playSlowAudio(_ sender: UIButton) {
 		playAudioWithVariableSpeed(0.5)
 	}
 
 
-	@IBAction func playFastAudio(sender: UIButton) {
+	@IBAction func playFastAudio(_ sender: UIButton) {
 		playAudioWithVariableSpeed(1.5)
 	}
 
 
-	@IBAction func playChipmunkAudio(sender: UIButton) {
+	@IBAction func playChipmunkAudio(_ sender: UIButton) {
 		playAudioWithVariablePitch(1000)
 	}
 
 
-	@IBAction func playDarthvaderAudio(sender: UIButton) {
+	@IBAction func playDarthvaderAudio(_ sender: UIButton) {
 		playAudioWithVariablePitch(-1000)
 	}
 
 
-	@IBAction func stopAudioButton(sender: AnyObject) {
+	@IBAction func stopAudioButton(_ sender: AnyObject) {
 		stopAudio()
 	}
 
 
 	//For audio for the fast or slow buttons.
-	func playAudioWithVariableSpeed(audioRate: Float!) {
+	func playAudioWithVariableSpeed(_ audioRate: Float!) {
 
 		//First, stops audio that is currently playing.
 		stopAudio()
@@ -96,22 +96,22 @@ class PlaySoundsViewController: UIViewController {
 
 
 	//Plays audio for the variable pitch buttons.
-	func playAudioWithVariablePitch(pitch: Float){
+	func playAudioWithVariablePitch(_ pitch: Float){
 
 		//First, stops audio that is currently playing.
 		stopAudio()
 
 		let audioPlayerNode = AVAudioPlayerNode()
-		audioEngine.attachNode(audioPlayerNode)
+		audioEngine.attach(audioPlayerNode)
 
 		let changePitchEffect = AVAudioUnitTimePitch()
 		changePitchEffect.pitch = pitch
-		audioEngine.attachNode(changePitchEffect)
+		audioEngine.attach(changePitchEffect)
 
 		audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
 		audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
 
-		audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
+		audioPlayerNode.scheduleFile(audioFile, at: nil, completionHandler: nil)
 		do {
 			try audioEngine.start()
 		} catch _ {
