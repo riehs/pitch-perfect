@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vly-mB-bBh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Vly-mB-bBh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -95,13 +95,13 @@
                                 <exclude reference="FNI-Px-NaE"/>
                                 <exclude reference="GRV-r7-2MM"/>
                                 <exclude reference="qih-al-aKf"/>
-                                <exclude reference="Ppt-bX-gep"/>
                                 <exclude reference="d1u-vy-H7x"/>
                                 <exclude reference="lPy-fo-zwr"/>
-                                <exclude reference="nYx-UC-lto"/>
                                 <exclude reference="9mh-N8-Set"/>
                                 <exclude reference="TtX-fR-iT4"/>
+                                <exclude reference="nYx-UC-lto"/>
                                 <exclude reference="cWk-fb-bMl"/>
+                                <exclude reference="Ppt-bX-gep"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -116,13 +116,13 @@
                                 <include reference="FNI-Px-NaE"/>
                                 <include reference="GRV-r7-2MM"/>
                                 <include reference="qih-al-aKf"/>
-                                <include reference="Ppt-bX-gep"/>
                                 <include reference="d1u-vy-H7x"/>
                                 <include reference="lPy-fo-zwr"/>
-                                <include reference="nYx-UC-lto"/>
                                 <include reference="9mh-N8-Set"/>
                                 <include reference="TtX-fR-iT4"/>
+                                <include reference="nYx-UC-lto"/>
                                 <include reference="cWk-fb-bMl"/>
+                                <include reference="Ppt-bX-gep"/>
                             </mask>
                         </variation>
                     </view>
@@ -239,15 +239,15 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="vW1-oh-1sj"/>
-                                <exclude reference="qYg-h3-sIn"/>
-                                <exclude reference="DdD-lx-7Fk"/>
-                                <exclude reference="cPW-WT-r7r"/>
-                                <exclude reference="aP3-do-Rv0"/>
-                                <exclude reference="k94-Aj-dfN"/>
-                                <exclude reference="Ced-3I-6AR"/>
-                                <exclude reference="WRy-uO-Jtv"/>
                                 <exclude reference="0bl-X9-UhN"/>
                                 <exclude reference="ZCZ-9R-Gp2"/>
+                                <exclude reference="aP3-do-Rv0"/>
+                                <exclude reference="k94-Aj-dfN"/>
+                                <exclude reference="DdD-lx-7Fk"/>
+                                <exclude reference="cPW-WT-r7r"/>
+                                <exclude reference="Ced-3I-6AR"/>
+                                <exclude reference="WRy-uO-Jtv"/>
+                                <exclude reference="qYg-h3-sIn"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -260,15 +260,15 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="vW1-oh-1sj"/>
-                                <include reference="qYg-h3-sIn"/>
-                                <include reference="DdD-lx-7Fk"/>
-                                <include reference="cPW-WT-r7r"/>
-                                <include reference="aP3-do-Rv0"/>
-                                <include reference="k94-Aj-dfN"/>
-                                <include reference="Ced-3I-6AR"/>
-                                <include reference="WRy-uO-Jtv"/>
                                 <include reference="0bl-X9-UhN"/>
                                 <include reference="ZCZ-9R-Gp2"/>
+                                <include reference="aP3-do-Rv0"/>
+                                <include reference="k94-Aj-dfN"/>
+                                <include reference="DdD-lx-7Fk"/>
+                                <include reference="cPW-WT-r7r"/>
+                                <include reference="Ced-3I-6AR"/>
+                                <include reference="WRy-uO-Jtv"/>
+                                <include reference="qYg-h3-sIn"/>
                             </mask>
                         </variation>
                     </view>
