@@ -87,6 +87,12 @@
             ReferencedContainer = "container:Pitch Perfect.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "SWIFT_DEBUG_IMPLICIT_OBJC_ENTRYPOINT"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
