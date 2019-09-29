@@ -29,12 +29,12 @@ class PlaySoundsViewController: UIViewController {
 		//This piece of code sets the sound to always play on the Speakers
 		let session = AVAudioSession.sharedInstance()
 		do {
-			try session.setCategory(AVAudioSessionCategoryPlayback)
+			try session.setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)))
 		} catch let error as NSError {
 			print(error)
 		}
 		do {
-			try session.overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
+			try session.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
 		} catch let error as NSError {
 			print(error)
 		}
@@ -130,4 +130,9 @@ class PlaySoundsViewController: UIViewController {
 		audioEngine.stop()
 		audioEngine.reset()
 	}
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }
